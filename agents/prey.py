@@ -27,7 +27,7 @@ class Prey(Animal):
             self.time_alive = 0
 
     def reproduce(self, world):
-        world.add_prey(Prey(self.world,
+        world.add_prey(Prey(world,
                             self.position,
                             self.vision_range,
                             self.vision_width))
