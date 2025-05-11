@@ -25,7 +25,7 @@ class World:
         if prey in self.preys:
             self.preys.remove(prey)
 
-    def randomposition(self):
+    def random_position(self):
         return (random.random() * self.width, random.random() * self.height)
 
     def update(self):
