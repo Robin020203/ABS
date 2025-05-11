@@ -34,6 +34,12 @@ class Predator(Animal):
         # else:
         #   self.wander()
 
+    def reproduce(self, world):
+        world.add_predator(Predator(self.world,
+                                    self.position,
+                                    self.vision_range,
+                                    self.vision_width))
+
 
 
 

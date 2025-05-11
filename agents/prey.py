@@ -23,7 +23,11 @@ class Prey(Animal):
         self.time_alive += 1
 
         if self.time_alive >= self.reproduction_threshold:
-            self.reproduce()
+            self.reproduce(world)
+            self.time_alive = 0
 
-    def reproduce(self):
-        pass #TODO
+    def reproduce(self, world):
+        world.add_prey(Prey(self.world,
+                            self.position,
+                            self.vision_range,
+                            self.vision_width))
