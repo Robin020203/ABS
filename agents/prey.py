@@ -23,7 +23,7 @@ class Prey(Animal):
         self.vision_width = util.clip(40.0, 80.0, vision_width - (6.66 * vision_mutation))
         self.energy_consumption = 1
         self.time_alive = 0
-        self.reproduction_threshold = 50 # after this amount of timesteps, the prey reproduces
+        self.reproduction_threshold = 5000 # after this amount of timesteps, the prey reproduces
 
 
     def look_for_predator(self, predators):
@@ -43,8 +43,28 @@ class Prey(Animal):
                     visible_predators.append((predator, distance)) # because its visible now
         return visible_predators
 
+    def run_away_from_predators(self, predators):
+        visible_predators = self.look_for_predator(predators)
+        if not visible_predators:
+            return
+        # average positions away from enemies
+        avg_x = sum(predator.position[0] for predator, distance in visible_predators) / len(visible_predators)
+        avg_y = sum(predator.position[1] for predator, distance in visible_predators) / len(visible_predators)
+
+        # vector away from enemies
+        dx = self.position[0] - avg_x
+        dy = self.position[1] - avg_y
+        length = math.hypot(dx, dy)
+
+        if length > 0:
+            dx = dx / length * self.speed
+            dy = dy / length * self.speed
+            self.position = (self.position[0] + dx, self.position[1] + dy)
+            self.vision_angle = math.degrees(math.atan2(dy, dx))
+
 
     def update(self, world):
+        self.run_away_from_predators(world.predators)
         super().update(world)
         self.energy -= self.energy_consumption
         self.time_alive += 1
@@ -61,5 +81,6 @@ class Prey(Animal):
                             self.position,
                             self.vision_range,
                             self.vision_width)
+        #new_prey.vision_angle = random.uniform(0, 360) ???
         world.add_prey(new_prey)
         world.newborns.append(new_prey)

@@ -20,10 +20,12 @@ class World:
 
     def predator_dies(self, predator: Predator):
         if predator in self.predators:
+            predator.dead = True
             self.predators.remove(predator)
 
     def prey_dies(self, prey: Prey):
         if prey in self.preys:
+            prey.dead = True
             self.preys.remove(prey)
 
     def random_position(self):
@@ -37,6 +39,3 @@ class World:
 
         for prey in self.preys:
             prey.update(self)
-
-
-

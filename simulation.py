@@ -55,37 +55,51 @@ while True:
             animal_to_object[baby] = prey_obj
     world.newborns = []
 
+
+    to_remove_predators = []
     for predator in world.predators:
         if predator in animal_to_object:
             obj = animal_to_object[predator]
             obj.pos = vector(predator.position[0], predator.position[1], 1)
             if predator.dead:
                 obj.visible = False
-                del obj
-                world.predator_dies(predator) # else predator was visible after death
+                to_remove_predators.append(predator)
+                # del obj
+                # del animal_to_object[predator]
+                #world.predator_dies(predator) # else predator was visible after death
+    for predator in to_remove_predators:
+        del animal_to_object[predator]
+        world.predator_dies(predator)
 
+    to_remove_preys = []
     for prey in world.preys:
         if prey in animal_to_object:
             obj = animal_to_object[prey]
             obj.pos = vector(prey.position[0], prey.position[1], 1)
             if prey.dead:
                 obj.visible = False
-                del obj
-                world.prey_dies(prey) # else prey was visible after death
+                to_remove_preys.append(prey)
+                # del obj
+                # del animal_to_object[prey]
+                #world.prey_dies(prey) # else prey was visible after death
+    for prey in to_remove_preys:
+        del animal_to_object[prey]
+        world.prey_dies(prey)
 
-    ### TEST ###
-    for predator in world.predators:
-        sphere_obj = animal_to_object[predator]
-        visible_preys = predator.look_for_prey(world.preys)
-        if visible_preys:
-            sphere_obj.color = color.blue  # HUNT MODE
-        else:
-            sphere_obj.color = color.red  # WANDER MODE
+    ### TEST ### -> error
 
-    for prey in world.preys:
-        sphere_obj = animal_to_object[prey]
-        visible_predators = prey.look_for_predator(world.predators)
-        if visible_predators:
-            sphere_obj.color = color.yellow  # SCARED MODE
-        else:
-            sphere_obj.color = color.green  # WANDER MODE
+    #for predator in world.predators:
+    #    sphere_obj = animal_to_object[predator]
+    #    visible_preys = predator.look_for_prey(world.preys)
+    #    if visible_preys:
+    #        sphere_obj.color = color.blue  # HUNT MODE
+    #    else:
+    #        sphere_obj.color = color.red  # WANDER MODE
+
+    #for prey in world.preys:
+    #    sphere_obj = animal_to_object[prey]
+    #    visible_predators = prey.look_for_predator(world.predators)
+    #    if visible_predators:
+    #        sphere_obj.color = color.yellow  # SCARED MODE
+    #    else:
+    #        sphere_obj.color = color.green  # WANDER MODE
