@@ -13,6 +13,8 @@ class Prey(Animal):
         if not vision_width:
             vision_width = 60 + (6.66 * (10 - vision_range))
         vision_mutation = random.gauss(0, 1)
+        # FEEDBACK: max + min -> clip function
+        # ophopen van density aan de clipped edges van de gaussian
         self.vision_range = max(7.0, min(13.0, vision_range + vision_mutation))
         self.vision_width = max(40.0, min(80.0, vision_width - (6.66 * vision_mutation)))
         self.energy_consumption = 1

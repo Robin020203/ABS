@@ -24,6 +24,7 @@ for i in range(number_of_prey):
 predator_objects = []
 prey_objects = []
 
+# FEEDBACK: ontkoppelen visualisatie en logic (eventueel met een dictionary)
 # dictionary for visualisation
 animal_to_object = {}
 
