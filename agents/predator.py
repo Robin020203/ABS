@@ -1,5 +1,6 @@
 import random
 import util
+import math
 from typing import Optional, Tuple
 #from ABS.agents.animal import Animal
 from agents.animal import Animal
@@ -26,6 +27,24 @@ class Predator(Animal):
         self.max_hunger = 50 # timesteps before dying of hunger
         self.reproduction_threshold = 3 #amount of prey to eat in order to reproduce
         self.eaten_prey = 0
+
+
+    def look_for_prey(self, preys):
+        visible_preys = []
+        for prey in preys:
+            dx = prey.position[0] - self.position[0]
+            dy = prey.position[1] - self.position[1]
+            distance = math.hypot(dx, dy) # 2D distance between predator and prey
+
+            if distance <= self.vision_range:
+                angle_to_prey = math.degrees(math.atan2(dy, dx))
+                angle_diff = (angle_to_prey - self.vision_angle + 360) % 360
+                if angle_diff > 180:
+                    angle_diff = 360 - angle_diff # smallest corner
+
+                if angle_diff <= self.vision_width / 2: # difference has to be smaller than width/2
+                    visible_preys.append((prey, distance)) # because its visible now
+        return visible_preys
 
 
     def update(self, world):
