@@ -46,24 +46,6 @@ while True:
     rate(30)
     world.update()
 
-    ### TEST ###
-    for predator in world.predators:
-        sphere_obj = animal_to_object[predator]
-        visible_preys = predator.look_for_prey(world.preys)
-        if visible_preys:
-            sphere_obj.color = color.blue  # HUNT MODE
-        else:
-            sphere_obj.color = color.red  # WANDER MODE
-
-    for prey in world.preys:
-        sphere_obj = animal_to_object[prey]
-        visible_predators = prey.look_for_predator(world.predators)
-        if visible_predators:
-            sphere_obj.color = color.yellow  # SCARED MODE
-        else:
-            sphere_obj.color = color.green  # WANDER MODE
-
-
     for baby in world.newborns:
         if isinstance(baby, Predator):
             pred_obj = sphere(pos=vector(baby.position[0], baby.position[1], 1), radius=1, color=color.red)
@@ -89,4 +71,19 @@ while True:
                 obj.visible = False
                 del obj
 
+    ### TEST ###
+    for predator in world.predators:
+        sphere_obj = animal_to_object[predator]
+        visible_preys = predator.look_for_prey(world.preys)
+        if visible_preys:
+            sphere_obj.color = color.blue  # HUNT MODE
+        else:
+            sphere_obj.color = color.red  # WANDER MODE
 
+    for prey in world.preys:
+        sphere_obj = animal_to_object[prey]
+        visible_predators = prey.look_for_predator(world.predators)
+        if visible_predators:
+            sphere_obj.color = color.yellow  # SCARED MODE
+        else:
+            sphere_obj.color = color.green  # WANDER MODE
