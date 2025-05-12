@@ -2,7 +2,7 @@ import random
 import math
 from typing import List, Optional, Tuple
 
-
+# FEEDBACK: mobility class, zodat de mobility behaviour makkelijk kan worden ingeplugd
 class Animal:
     def __init__(self,
                  world,

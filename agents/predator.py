@@ -14,6 +14,8 @@ class Predator(Animal):
         if not vision_width:
             vision_width = 20 + (3.33 * (20 - vision_range))
         vision_mutation = random.gauss(0, 0.5)
+        # FEEDBACK: max + min -> clip function
+        # ophopen van density aan de clipped edges van de gaussian
         self.vision_range = max(17.0, min(23.0, vision_range + vision_mutation))
         self.vision_width = max(10.0, min(30.0, vision_width - (3.33 * vision_mutation)))
         self.energy_consumption = 2 # how much energy spent each timestep when moving normally
