@@ -62,6 +62,7 @@ while True:
             if predator.dead:
                 obj.visible = False
                 del obj
+                world.predator_dies(predator)
 
     for prey in world.preys:
         if prey in animal_to_object:
@@ -70,6 +71,7 @@ while True:
             if prey.dead:
                 obj.visible = False
                 del obj
+                world.prey_dies(prey)
 
     ### TEST ###
     for predator in world.predators:
