@@ -35,3 +35,5 @@ class Animal:
         self.position = (new_x, new_y)
 
 
+
+

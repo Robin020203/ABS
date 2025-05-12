@@ -1,5 +1,6 @@
 import random
-from typing import List, Optional, Tuple
+import util
+from typing import Optional, Tuple
 #from ABS.agents.animal import Animal
 from agents.animal import Animal
 
@@ -15,8 +16,10 @@ class Prey(Animal):
         vision_mutation = random.gauss(0, 1)
         # FEEDBACK: max + min -> clip function
         # ophopen van density aan de clipped edges van de gaussian
-        self.vision_range = max(7.0, min(13.0, vision_range + vision_mutation))
-        self.vision_width = max(40.0, min(80.0, vision_width - (6.66 * vision_mutation)))
+        #self.vision_range = max(7.0, min(13.0, vision_range + vision_mutation))
+        self.vision_range = util.clip(7.0, 13.0, vision_range + vision_mutation)
+        #self.vision_width = max(40.0, min(80.0, vision_width - (6.66 * vision_mutation)))
+        self.vision_width = util.clip(40.0, 80.0, vision_width - (6.66 * vision_mutation))
         self.energy_consumption = 1
         self.time_alive = 0
         self.reproduction_threshold = 50 # after this amount of timesteps, the prey reproduces

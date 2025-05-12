@@ -1,5 +1,6 @@
 import random
-from typing import List, Optional, Tuple
+import util
+from typing import Optional, Tuple
 #from ABS.agents.animal import Animal
 from agents.animal import Animal
 
@@ -16,8 +17,10 @@ class Predator(Animal):
         vision_mutation = random.gauss(0, 0.5)
         # FEEDBACK: max + min -> clip function
         # ophopen van density aan de clipped edges van de gaussian
-        self.vision_range = max(17.0, min(23.0, vision_range + vision_mutation))
-        self.vision_width = max(10.0, min(30.0, vision_width - (3.33 * vision_mutation)))
+        #self.vision_range = max(17.0, min(23.0, vision_range + vision_mutation))
+        self.vision_range = util.clip(17.0, 23.0, vision_range + vision_mutation)
+        #self.vision_width = max(10.0, min(30.0, vision_width - (3.33 * vision_mutation)))
+        self.vision_width = util.clip(10.0, 30.0, vision_width - (3.33 * vision_mutation))
         self.energy_consumption = 2 # how much energy spent each timestep when moving normally
         self.hunger = 0 # timesteps since last meal
         self.max_hunger = 50 # timesteps before dying of hunger
