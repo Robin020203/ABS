@@ -13,6 +13,7 @@ number_of_prey = 50
 field = box(pos=vector(world.width / 2, world.height / 2, 0),
             size=vector(world.width , world.height, 1),
             color=color.white)
+
 #initialize population
 for i in range(number_of_predators):
     world.add_predator(Predator(world))
@@ -45,7 +46,8 @@ while True:
 
     for predator,obj in zip(world.predators,predator_objects):
         obj.pos = vector(predator.position[0], predator.position[1], 1)
-
+        #if predator.dead:
+        #TODO
     for prey,obj in zip(world.preys,prey_objects):
         obj.pos = vector(prey.position[0], prey.position[1], 1)
 

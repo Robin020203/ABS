@@ -13,6 +13,7 @@ class Animal:
         self.vision_angle = random.uniform(0, 360)
         self.energy = 100
         self.object = None
+        self.dead = False
 
     def update(self, world):
         dx = math.cos(math.radians(self.vision_angle)) * self.speed
