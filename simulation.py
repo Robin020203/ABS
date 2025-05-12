@@ -20,9 +20,6 @@ for i in range(number_of_predators):
 for i in range(number_of_prey):
     world.add_prey(Prey(world))
 
-#visualise animals
-predator_objects = []
-prey_objects = []
 
 # FEEDBACK: ontkoppelen visualisatie en logic (eventueel met een dictionary)
 # dictionary for visualisation
@@ -30,12 +27,10 @@ animal_to_object = {}
 
 for predator in world.predators:
     pred_obj = sphere(pos=vector(predator.position[0], predator.position[1], 1), radius=1, color=color.red)
-    predator_objects.append(pred_obj)
     animal_to_object[predator] = pred_obj
 
 for prey in world.preys:
     prey_obj = sphere(pos=vector(prey.position[0], prey.position[1], 1), radius=0.5, color=color.green)
-    prey_objects.append(prey_obj)
     animal_to_object[prey] = prey_obj
 
 
@@ -64,4 +59,13 @@ while True:
         if prey.dead:
             obj.visible = False
             del obj
+
+    for baby in world.newborns:
+        if isinstance(baby, Predator):
+            pred_obj = sphere(pos=vector(baby.position[0], baby.position[1], 1), radius=1, color=color.red)
+            animal_to_object[baby] = pred_obj
+        elif isinstance(baby, Prey):
+            prey_obj = sphere(pos=vector(baby.position[0], baby.position[1], 1), radius=0.5, color=color.green)
+            animal_to_object[baby] = prey_obj
+
 

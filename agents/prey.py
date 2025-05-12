@@ -1,7 +1,7 @@
 import random
 from typing import List, Optional, Tuple
-#from ABS.agents.animal import Animal
-from agents.animal import Animal
+from ABS.agents.animal import Animal
+#from agents.animal import Animal
 
 class Prey(Animal):
     def __init__(self,
@@ -19,7 +19,7 @@ class Prey(Animal):
         self.vision_width = max(40.0, min(80.0, vision_width - (6.66 * vision_mutation)))
         self.energy_consumption = 1
         self.time_alive = 0
-        self.reproduction_threshold = 5000 # after this amount of timesteps, the prey reproduces
+        self.reproduction_threshold = 50 # after this amount of timesteps, the prey reproduces
 
     def update(self, world):
         super().update(world)
@@ -34,7 +34,9 @@ class Prey(Animal):
         #    self.dead = True
 
     def reproduce(self, world):
-        world.add_prey(Prey(world,
+        new_prey = Prey(world,
                             self.position,
                             self.vision_range,
-                            self.vision_width))
+                            self.vision_width)
+        world.add_prey(new_prey)
+        world.newborns.append(new_prey)

@@ -10,6 +10,7 @@ class World:
         self.predators: List[Predator] = []
         self.preys: List[Prey] = []
         self.timestep: int = 0
+        self.newborns = []
 
     def add_predator(self, predator: Predator):
         self.predators.append(predator)
