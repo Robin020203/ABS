@@ -53,7 +53,9 @@ while True:
     for predator in world.predators:
         obj = animal_to_object[predator]
         obj.pos = vector(predator.position[0], predator.position[1], 1)
-        #if predator.dead:
+        if predator.dead:
+            obj.visible = False
+            del obj
         #TODO
 
     for prey in world.preys:
