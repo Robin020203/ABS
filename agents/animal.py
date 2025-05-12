@@ -12,7 +12,6 @@ class Animal:
         self.position = position if position else self.world.random_position()
         self.vision_angle = random.uniform(0, 360)
         self.energy = 100
-        self.object = None
         self.dead = False
 
     def update(self, world):

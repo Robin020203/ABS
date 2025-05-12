@@ -30,6 +30,9 @@ class Prey(Animal):
             self.reproduce(world)
             self.time_alive = 0
 
+        #if self.energy <= 0:
+        #    self.dead = True
+
     def reproduce(self, world):
         world.add_prey(Prey(world,
                             self.position,
