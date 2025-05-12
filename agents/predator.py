@@ -32,7 +32,6 @@ class Predator(Animal):
 
         if self.hunger > self.max_hunger:
             self.dead = True
-        #werkt nog niet #TODO
 
         if self.eaten_prey >= self.reproduction_threshold:
             self.reproduce(world)
