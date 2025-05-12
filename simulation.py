@@ -46,20 +46,6 @@ while True:
     rate(30)
     world.update()
 
-    for predator in world.predators:
-        obj = animal_to_object[predator]
-        obj.pos = vector(predator.position[0], predator.position[1], 1)
-        if predator.dead:
-            obj.visible = False
-            del obj
-
-    for prey in world.preys:
-        obj = animal_to_object[prey]
-        obj.pos = vector(prey.position[0], prey.position[1], 1)
-        if prey.dead:
-            obj.visible = False
-            del obj
-
     for baby in world.newborns:
         if isinstance(baby, Predator):
             pred_obj = sphere(pos=vector(baby.position[0], baby.position[1], 1), radius=1, color=color.red)
@@ -67,5 +53,22 @@ while True:
         elif isinstance(baby, Prey):
             prey_obj = sphere(pos=vector(baby.position[0], baby.position[1], 1), radius=0.5, color=color.green)
             animal_to_object[baby] = prey_obj
+    world.newborns = []
+
+    for predator in world.predators:
+        if predator in animal_to_object:
+            obj = animal_to_object[predator]
+            obj.pos = vector(predator.position[0], predator.position[1], 1)
+            if predator.dead:
+                obj.visible = False
+                del obj
+
+    for prey in world.preys:
+        if prey in animal_to_object:
+            obj = animal_to_object[prey]
+            obj.pos = vector(prey.position[0], prey.position[1], 1)
+            if prey.dead:
+                obj.visible = False
+                del obj
 
 
