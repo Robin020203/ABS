@@ -11,7 +11,7 @@ class Predator(Animal):
                  vision_width: Optional[float] = None):
         super().__init__(world, position)
         if not vision_width:
-            vision_width = 20 - (3.33 * (20 - vision_range))
+            vision_width = 20 + (3.33 * (20 - vision_range))
         vision_mutation = random.gauss(0, 0.5)
         self.vision_range = max(17.0, min(23.0, vision_range + vision_mutation))
         self.vision_width = max(10.0, min(30.0, vision_width - (3.33 * vision_mutation)))
