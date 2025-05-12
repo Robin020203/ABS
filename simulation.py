@@ -33,6 +33,9 @@ for prey in world.preys:
     prey_objects.append(prey_obj)
     prey.object = prey_obj
 
+    # Loskoppelen OF werken met dictionary
+    # (elke stap opnieuw tekenen ipv in het begin tekenen, zodat enkel levende dieren blijven)
+
 
 scene.title = "Predator-Prey model"
 scene.height = 800
@@ -48,6 +51,7 @@ while True:
         obj.pos = vector(predator.position[0], predator.position[1], 1)
         #if predator.dead:
         #TODO
+
     for prey,obj in zip(world.preys,prey_objects):
         obj.pos = vector(prey.position[0], prey.position[1], 1)
 

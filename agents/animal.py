@@ -17,22 +17,22 @@ class Animal:
 
     def update(self, world):
         dx = math.cos(math.radians(self.vision_angle)) * self.speed
-        newx = self.position[0] + dx
-        if newx >= world.width:
+        new_x = self.position[0] + dx
+        if new_x >= world.width:
             self.vision_angle = 180 - self.vision_angle
-            newx = world.width
-        if newx <= 0:
+            new_x = world.width
+        if new_x <= 0:
             self.vision_angle = 180 - self.vision_angle
-            newx = 0
+            new_x = 0
 
         dy = math.sin(math.radians(self.vision_angle)) * self.speed
-        newy = self.position[1] + dy
-        if newy >= world.height:
+        new_y = self.position[1] + dy
+        if new_y >= world.height:
             self.vision_angle = -self.vision_angle
-            newy = world.height
-        if newy <= 0:
+            new_y = world.height
+        if new_y <= 0:
             self.vision_angle = -self.vision_angle
-            newy = 0
-        self.position = (newx, newy)
+            new_y = 0
+        self.position = (new_x, new_y)
 
 

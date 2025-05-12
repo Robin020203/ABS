@@ -1,6 +1,7 @@
 import random
 from typing import List, Optional, Tuple
 from ABS.agents.animal import Animal
+#from agents.animal import Animal
 
 
 class Predator(Animal):
