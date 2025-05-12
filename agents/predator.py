@@ -27,8 +27,8 @@ class Predator(Animal):
         self.energy -= self.energy_consumption
         self.hunger += 1
 
-        if self.hunger > self.max_hunger:
-            world.predator_dies(self)
+        #if self.hunger > self.max_hunger:
+
 
         if self.eaten_prey >= self.reproduction_threshold:
             self.reproduce(world)

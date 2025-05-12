@@ -16,7 +16,7 @@ class Prey(Animal):
         self.vision_width = max(40.0, min(80.0, vision_width - (6.66 * vision_mutation)))
         self.energy_consumption = 1
         self.time_alive = 0
-        self.reproduction_threshold = 50 # after this amount of timesteps, the prey reproduces
+        self.reproduction_threshold = 5000 # after this amount of timesteps, the prey reproduces
 
     def update(self, world):
         super().update(world)
