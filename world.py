@@ -37,10 +37,5 @@ class World:
         for prey in self.preys:
             prey.update(self)
 
-        self.update_reproduction()
-
-    def update_reproduction(self):
-        pass
-
 
 

@@ -19,6 +19,7 @@ class Prey(Animal):
         self.reproduction_threshold = 50 # after this amount of timesteps, the prey reproduces
 
     def update(self, world):
+        super().update(world)
         self.energy -= self.energy_consumption
         self.time_alive += 1
 

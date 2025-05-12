@@ -21,7 +21,9 @@ class Predator(Animal):
         self.reproduction_threshold = 3 #amount of prey to eat in order to reproduce
         self.eaten_prey = 0
 
+
     def update(self, world):
+        super().update(world)
         self.energy -= self.energy_consumption
         self.hunger += 1
 
