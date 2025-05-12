@@ -24,34 +24,41 @@ for i in range(number_of_prey):
 predator_objects = []
 prey_objects = []
 
+# dictionary for visualisation
+animal_to_object = {}
+
 for predator in world.predators:
     pred_obj = sphere(pos=vector(predator.position[0], predator.position[1], 1), radius=1, color=color.red)
     predator_objects.append(pred_obj)
-    predator.object = pred_obj
+    animal_to_object[predator] = pred_obj
+
 for prey in world.preys:
     prey_obj = sphere(pos=vector(prey.position[0], prey.position[1], 1), radius=0.5, color=color.green)
     prey_objects.append(prey_obj)
-    prey.object = prey_obj
-
-    # Loskoppelen OF werken met dictionary
-    # (elke stap opnieuw tekenen ipv in het begin tekenen, zodat enkel levende dieren blijven)
+    animal_to_object[prey] = prey_obj
 
 
+# scene setup
 scene.title = "Predator-Prey model"
 scene.height = 800
 scene.width = 800
 scene.background = color.black
 scene.center = vector(world.width / 2, world.height / 2, 0)
 
+# main loop
 while True:
     rate(30)
     world.update()
 
-    for predator,obj in zip(world.predators,predator_objects):
+    for predator in world.predators:
+        obj = animal_to_object[predator]
         obj.pos = vector(predator.position[0], predator.position[1], 1)
         #if predator.dead:
         #TODO
 
-    for prey,obj in zip(world.preys,prey_objects):
+    for prey in world.preys:
+        obj = animal_to_object[prey]
         obj.pos = vector(prey.position[0], prey.position[1], 1)
+        # if prey.dead:
+        # TODO
 
