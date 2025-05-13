@@ -13,7 +13,7 @@ class Prey(Animal):
                  vision_width: Optional[float] = None):
         super().__init__(world, position)
         if not vision_width:
-            vision_width = 60 + (6.66 * (10 - vision_range))
+            vision_width = 180 + (6.66 * (10 - vision_range))
         vision_mutation = random.gauss(0, 1)
         # FEEDBACK: max + min -> clip function
         # ophopen van density aan de clipped edges van de gaussian

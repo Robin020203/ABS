@@ -6,7 +6,7 @@ from world import World
 scene = canvas()
 #initialize world
 world = World()
-number_of_predators = 10
+number_of_predators = 5
 number_of_prey = 50
 
 
