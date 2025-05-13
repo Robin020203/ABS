@@ -65,7 +65,8 @@ class Predator(Animal):
 
         if random.random() <= chance:
             self.position = closest_prey.position
-            world.prey_dies(closest_prey)
+            closest_prey.dead = True
+            #world.prey_dies(closest_prey)
             self.hunger = 0
             self.eaten_prey += 1
 
@@ -85,13 +86,6 @@ class Predator(Animal):
         if self.eaten_prey >= self.reproduction_threshold:
             self.reproduce(world)
             self.eaten_prey = 0
-
-        # prey = self.look_for_prey(self)
-
-        # if prey:
-
-        # else:
-        #   self.wander()
 
     def reproduce(self, world):
         new_predator = Predator(world,
