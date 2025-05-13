@@ -21,9 +21,9 @@ class Prey(Animal):
         self.vision_range = util.clip(7.0, 13.0, vision_range + vision_mutation)
         #self.vision_width = max(40.0, min(80.0, vision_width - (6.66 * vision_mutation)))
         self.vision_width = util.clip(40.0, 80.0, vision_width - (6.66 * vision_mutation))
-        self.energy_consumption = 1
+        self.energy_consumption = 0.5
         self.time_alive = 0
-        self.reproduction_threshold = 1000 # after this amount of timesteps, the prey reproduces
+        self.reproduction_threshold = random.uniform(500, 1000)
 
 
     def look_for_predator(self, predators):
@@ -77,10 +77,12 @@ class Prey(Animal):
         #    self.dead = True
 
     def reproduce(self, world):
-        new_prey = Prey(world,
-                        self.position,
-                        self.vision_range,
-                        self.vision_width)
-        #new_prey.vision_angle = random.uniform(0, 360)
-        world.add_prey(new_prey)
-        world.newborns.append(new_prey)
+        number_of_babies = random.randint(1, 4) #random between 1 and 4 babies
+        for baby in range(number_of_babies):
+            new_prey = Prey(world,
+                            self.position,
+                            self.vision_range,
+                            self.vision_width)
+            #new_prey.vision_angle = random.uniform(0, 360)
+            world.add_prey(new_prey)
+            world.newborns.append(new_prey)
