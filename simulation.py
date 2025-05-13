@@ -86,20 +86,22 @@ while True:
         del animal_to_object[prey]
         world.prey_dies(prey)
 
-    ### TEST ### -> error
+    ### TEST ###
 
-    #for predator in world.predators:
-    #    sphere_obj = animal_to_object[predator]
-    #    visible_preys = predator.look_for_prey(world.preys)
-    #    if visible_preys:
-    #        sphere_obj.color = color.blue  # HUNT MODE
-    #    else:
-    #        sphere_obj.color = color.red  # WANDER MODE
+    if world.predators:
+        for predator in world.predators:
+            sphere_obj = animal_to_object[predator]
+            visible_preys = predator.look_for_prey(world.preys)
+            if visible_preys:
+                sphere_obj.color = color.blue  # HUNT MODE
+            else:
+                sphere_obj.color = color.red  # WANDER MODE
 
-    #for prey in world.preys:
-    #    sphere_obj = animal_to_object[prey]
-    #    visible_predators = prey.look_for_predator(world.predators)
-    #    if visible_predators:
-    #        sphere_obj.color = color.yellow  # SCARED MODE
-    #    else:
-    #        sphere_obj.color = color.green  # WANDER MODE
+    if world.preys:
+        for prey in world.preys:
+            sphere_obj = animal_to_object[prey]
+            visible_predators = prey.look_for_predator(world.predators)
+            if visible_predators:
+                sphere_obj.color = color.yellow  # SCARED MODE
+            else:
+                sphere_obj.color = color.green  # WANDER MODE
