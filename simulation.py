@@ -91,17 +91,23 @@ while True:
     if world.predators:
         for predator in world.predators:
             sphere_obj = animal_to_object[predator]
-            visible_preys = predator.look_for_prey(world.preys)
-            if visible_preys:
-                sphere_obj.color = color.blue  # HUNT MODE
+            if predator.resting:
+                sphere_obj.color = color.white  # REST MODE
             else:
-                sphere_obj.color = color.red  # WANDER MODE
+                visible_preys = predator.look_for_prey(world.preys)
+                if visible_preys:
+                    sphere_obj.color = color.blue  # HUNT MODE
+                else:
+                    sphere_obj.color = color.red  # WANDER MODE
 
     if world.preys:
         for prey in world.preys:
             sphere_obj = animal_to_object[prey]
-            visible_predators = prey.look_for_predator(world.predators)
-            if visible_predators:
-                sphere_obj.color = color.yellow  # SCARED MODE
+            if prey.resting:
+                sphere_obj.color = color.white # REST MODE
             else:
-                sphere_obj.color = color.green  # WANDER MODE
+                visible_predators = prey.look_for_predator(world.predators)
+                if visible_predators:
+                    sphere_obj.color = color.yellow  # SCARED MODE
+                else:
+                    sphere_obj.color = color.green  # WANDER MODE

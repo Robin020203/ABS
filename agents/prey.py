@@ -23,7 +23,7 @@ class Prey(Animal):
         self.vision_width = util.clip(40.0, 80.0, vision_width - (6.66 * vision_mutation))
         self.energy_consumption = 1
         self.time_alive = 0
-        self.reproduction_threshold = 5000 # after this amount of timesteps, the prey reproduces
+        self.reproduction_threshold = 1000 # after this amount of timesteps, the prey reproduces
 
 
     def look_for_predator(self, predators):

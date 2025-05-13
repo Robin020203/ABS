@@ -24,7 +24,7 @@ class Predator(Animal):
         self.vision_width = util.clip(10.0, 30.0, vision_width - (3.33 * vision_mutation))
         self.energy_consumption = 2 # how much energy spent each timestep when moving normally
         self.hunger = 0 # timesteps since last meal
-        self.max_hunger = 100 # timesteps before dying of hunger
+        self.max_hunger = 200 # timesteps before dying of hunger
         self.reproduction_threshold = 3 #amount of prey to eat in order to reproduce
         self.eaten_prey = 0
 
@@ -70,7 +70,9 @@ class Predator(Animal):
             self.hunger = 0
             self.eaten_prey += 1
 
-        self.energy = 0
+        self.energy -= 50
+        if self.energy <= 0:
+            self.energy = 0
 
 
 
