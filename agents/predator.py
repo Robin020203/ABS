@@ -24,7 +24,7 @@ class Predator(Animal):
         self.vision_width = util.clip(10.0, 30.0, vision_width - (3.33 * vision_mutation))
         self.energy_consumption = 2 # how much energy spent each timestep when moving normally
         self.hunger = 0 # timesteps since last meal
-        self.max_hunger = 500 # timesteps before dying of hunger
+        self.max_hunger = 100 # timesteps before dying of hunger
         self.reproduction_threshold = 3 #amount of prey to eat in order to reproduce
         self.eaten_prey = 0
 
@@ -66,6 +66,7 @@ class Predator(Animal):
         if random.random() <= chance:
             self.position = closest_prey.position
             world.prey_dies(closest_prey)
+            self.hunger = 0
             self.eaten_prey += 1
 
         self.energy = 0
@@ -93,10 +94,13 @@ class Predator(Animal):
         #   self.wander()
 
     def reproduce(self, world):
-        world.add_predator(Predator(world,
-                                    self.position,
-                                    self.vision_range,
-                                    self.vision_width))
+        new_predator = Predator(world,
+                                self.position,
+                                self.vision_range,
+                                self.vision_width)
+        # new_prey.vision_angle = random.uniform(0, 360)
+        world.add_predator(new_predator)
+        world.newborns.append(new_predator)
 
 
 

@@ -78,9 +78,9 @@ class Prey(Animal):
 
     def reproduce(self, world):
         new_prey = Prey(world,
-                            self.position,
-                            self.vision_range,
-                            self.vision_width)
-        #new_prey.vision_angle = random.uniform(0, 360) ???
+                        self.position,
+                        self.vision_range,
+                        self.vision_width)
+        #new_prey.vision_angle = random.uniform(0, 360)
         world.add_prey(new_prey)
         world.newborns.append(new_prey)
