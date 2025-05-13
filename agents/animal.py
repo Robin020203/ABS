@@ -12,9 +12,10 @@ class Animal:
         self.position = position if position else self.world.random_position()
         self.vision_angle = random.uniform(0, 360)
         self.dead = False
-        self.energy = 200
         self.max_energy = 200
+        self.energy = random.uniform(self.max_energy * 0.75, self.max_energy)
         self.rest_recovery_rate = 5
+        self.recovery_target_energy = random.uniform(self.max_energy / 2, self.max_energy)
         self.resting = False
         self.energy_consumption = 0     #prey=0.5 and predator=1
 
@@ -23,8 +24,8 @@ class Animal:
 
         if self.resting:
             self.energy += self.rest_recovery_rate
-            if self.energy >= self.max_energy:
-                self.energy = self.max_energy
+            if self.energy >= self.recovery_target_energy:
+                self.energy = min(self.max_energy, self.energy)
                 self.resting = False
             return # as long as self.resting = True, don't move
 
