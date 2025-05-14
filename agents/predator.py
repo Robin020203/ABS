@@ -35,19 +35,20 @@ class Predator(Animal):
 
     def look_for_prey(self, preys):
         visible_preys = []
-        for prey in preys:
-            dx = prey.position[0] - self.position[0]
-            dy = prey.position[1] - self.position[1]
-            distance = math.hypot(dx, dy) # 2D distance between predator and prey
+        if not self.resting:
+            for prey in preys:
+                dx = prey.position[0] - self.position[0]
+                dy = prey.position[1] - self.position[1]
+                distance = math.hypot(dx, dy) # 2D distance between predator and prey
 
-            if distance <= self.vision_range:
-                angle_to_prey = math.degrees(math.atan2(dy, dx))
-                angle_diff = (angle_to_prey - self.vision_angle + 360) % 360
-                if angle_diff > 180:
-                    angle_diff = 360 - angle_diff # smallest corner
+                if distance <= self.vision_range:
+                    angle_to_prey = math.degrees(math.atan2(dy, dx))
+                    angle_diff = (angle_to_prey - self.vision_angle + 360) % 360
+                    if angle_diff > 180:
+                        angle_diff = 360 - angle_diff # smallest corner
 
-                if angle_diff <= self.vision_width / 2: # difference has to be smaller than width/2
-                    visible_preys.append((prey, distance)) # because its visible now
+                    if angle_diff <= self.vision_width / 2: # difference has to be smaller than width/2
+                        visible_preys.append((prey, distance)) # because its visible now
         return visible_preys
 
     def jump_attack(self, preys, world):
