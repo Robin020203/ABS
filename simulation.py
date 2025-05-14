@@ -1,4 +1,5 @@
 from vpython import *
+#import math #cone visual
 from agents.predator import Predator
 from agents.prey import Prey
 from world import World
@@ -25,9 +26,23 @@ for i in range(number_of_prey):
 # dictionary for visualisation
 animal_to_object = {}
 
+#animal_to_cone = {}    #CONE VISUAL
+
 for predator in world.predators:
     pred_obj = sphere(pos=vector(predator.position[0], predator.position[1], 1), radius=1, color=color.red)
+
+    #cone_obj = cone(pos=vector(predator.cone_position[0],          #CONE VISUAL
+    #                           predator.cone_position[1],
+    #                           1),
+    #                axis=vector(math.cos(math.radians(predator.vision_angle)) * -1,
+    #                                           math.sin(math.radians(predator.vision_angle)) * -1,
+    #                                           0),
+    #                radius=predator.vision_width / 2,
+    #                color=color.purple)
+
     animal_to_object[predator] = pred_obj
+
+    #animal_to_cone[predator] = cone_obj                            #CONE VISUAL
 
 for prey in world.preys:
     prey_obj = sphere(pos=vector(prey.position[0], prey.position[1], 1), radius=0.5, color=color.green)
@@ -61,6 +76,14 @@ while True:
         if predator in animal_to_object:
             obj = animal_to_object[predator]
             obj.pos = vector(predator.position[0], predator.position[1], 1)
+
+            #if predator in animal_to_cone:                             #CONE VISUAL
+            #    cone = animal_to_cone[predator]
+            #    cone.pos = vector(predator.cone_position[0], predator.cone_position[1], 1)
+            #    cone.axis = vector(math.cos(math.radians(predator.vision_angle)) * -1,
+            #                       math.sin(math.radians(predator.vision_angle)) * -1,
+            #                       0)
+
             if predator.dead:
                 obj.visible = False
                 to_remove_predators.append(predator)

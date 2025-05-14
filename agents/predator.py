@@ -28,6 +28,10 @@ class Predator(Animal):
         self.reproduction_threshold = 3 #amount of prey to eat in order to reproduce
         self.eaten_prey = 0
 
+        #CONE VISUAL
+        #self.cone_position = (self.position[0] + math.cos(math.radians(self.vision_angle)) * self.vision_range,
+        #                      self.position[1] + math.sin(math.radians(self.vision_angle)) * self.vision_range)
+
 
     def look_for_prey(self, preys):
         visible_preys = []
@@ -79,6 +83,12 @@ class Predator(Animal):
     def update(self, world):
         self.jump_attack(world.preys, world)
         super().update(world)
+
+        #CONE VISUAL
+        #self.cone_position = (self.position[0] + math.cos(math.radians(self.vision_angle)) * self.vision_range,
+        #                      self.position[1] + math.sin(math.radians(self.vision_angle)) * self.vision_range)
+
+
         self.energy -= self.energy_consumption
         self.hunger += 1
 
