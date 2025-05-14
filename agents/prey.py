@@ -45,7 +45,7 @@ class Prey(Animal):
 
     def run_away_from_predators(self, predators):
         visible_predators = self.look_for_predator(predators)
-        if not visible_predators:
+        if not visible_predators or self.resting:
             return
         # average positions away from enemies
         avg_x = sum(predator.position[0] for predator, distance in visible_predators) / len(visible_predators)
