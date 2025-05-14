@@ -67,7 +67,7 @@ class Predator(Animal):
         if chance < 0.1:
             chance = 0.1
 
-        if random.random() <= chance:
+        if random.random() <= chance and self.energy > 50:
             self.position = closest_prey.position
             closest_prey.dead = True
             #world.prey_dies(closest_prey)
