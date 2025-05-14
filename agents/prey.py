@@ -23,7 +23,7 @@ class Prey(Animal):
         self.vision_width = util.clip(40.0, 80.0, vision_width - (6.66 * vision_mutation))
         self.energy_consumption = 0.5
         self.time_alive = 0
-        self.reproduction_threshold = random.uniform(500, 1000)
+        self.reproduction_threshold = random.uniform(150, 400)
 
 
     def look_for_predator(self, predators):
