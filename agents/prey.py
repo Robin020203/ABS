@@ -9,7 +9,7 @@ class Prey(Animal):
     def __init__(self,
                  world,
                  position: Optional[Tuple[float, float]] = None,
-                 vision_range: float = util.clip(7.0, 13.0, 10, random.gauss(0, 1), 0, 1), #max(7.0, min(13.0, random.gauss(10, 1))),
+                 vision_range: float = util.clip(7.0, 13.0, 10 + random.gauss(0, 1)), #max(7.0, min(13.0, random.gauss(10, 1))),
                  vision_width: Optional[float] = None):
         super().__init__(world, position)
         if not vision_width:
@@ -18,12 +18,12 @@ class Prey(Animal):
         # FEEDBACK: max + min -> clip function
         # ophopen van density aan de clipped edges van de gaussian
         #self.vision_range = max(7.0, min(13.0, vision_range + vision_mutation))
-        self.vision_range = util.clip(7.0, 13.0, vision_range, vision_mutation, 0, 1)
+        self.vision_range = util.clip(7.0, 13.0, vision_range + vision_mutation)
         #self.vision_width = max(40.0, min(80.0, vision_width - (6.66 * vision_mutation)))
-        self.vision_width = util.clip(40.0, 80.0, vision_width, -(6.66 * vision_mutation), 0, 3)
+        self.vision_width = util.clip(40.0, 80.0, vision_width - (6.66 * vision_mutation))
         self.energy_consumption = 0.5
         self.time_alive = 0
-        self.reproduction_threshold = random.uniform(150, 400)
+        self.reproduction_threshold = random.uniform(500, 1000)
 
 
     def look_for_predator(self, predators):
