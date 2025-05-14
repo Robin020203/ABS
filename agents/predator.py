@@ -10,18 +10,18 @@ class Predator(Animal):
     def __init__(self,
                  world,
                  position: Optional[Tuple[float, float]] = None,
-                 vision_range: float = max(17.0, min(23.0, random.gauss(20, 1))),
+                 vision_range: float = util.clip(17.0, 23.0, 20, random.gauss(0, 1), 0, 1), #max(17.0, min(23.0, random.gauss(20, 1))),
                  vision_width: Optional[float] = None):
         super().__init__(world, position)
         if not vision_width:
             vision_width = 20 + (3.33 * (20 - vision_range))
-        vision_mutation = random.gauss(0, 0.5)
+        vision_mutation = random.gauss(0, 1)
         # FEEDBACK: max + min -> clip function
         # ophopen van density aan de clipped edges van de gaussian
         #self.vision_range = max(17.0, min(23.0, vision_range + vision_mutation))
-        self.vision_range = util.clip(17.0, 23.0, vision_range + vision_mutation)
+        self.vision_range = util.clip(17.0, 23.0, vision_range, vision_mutation, 0, 1)
         #self.vision_width = max(10.0, min(30.0, vision_width - (3.33 * vision_mutation)))
-        self.vision_width = util.clip(10.0, 30.0, vision_width - (3.33 * vision_mutation))
+        self.vision_width = util.clip(10.0, 30.0, vision_width, -(3.33 * vision_mutation), 0, 3)
         self.energy_consumption = 1 # how much energy spent each timestep when moving normally
         self.hunger = 0 # timesteps since last meal
         self.max_hunger = 300 # timesteps before dying of hunger
