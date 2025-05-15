@@ -40,6 +40,15 @@ for predator in world.predators:
     #                radius=predator.vision_width / 2,
     #                color=color.purple)
 
+    #cone_obj = cylinder(pos=vector(predator.position[0],  #SMELL VISUAL
+    #                               predator.position[1],
+    #                               1),
+    #                    axis=vector(0,0,1),
+    #                    radius=7,
+    #                    length=1,
+    #                    color=color.purple,
+    #                    opacity=0.5)
+
     animal_to_object[predator] = pred_obj
 
     #animal_to_cone[predator] = cone_obj                            #CONE VISUAL
@@ -79,7 +88,8 @@ while True:
 
             #if predator in animal_to_cone:                             #CONE VISUAL
             #    cone = animal_to_cone[predator]
-            #    cone.pos = vector(predator.cone_position[0], predator.cone_position[1], 1)
+            #    cone.pos = vector(predator.position[0], predator.position[1], 1)   #SMELL
+            #    cone.pos = vector(predator.cone_position[0], predator.cone_position[1], 1) #VISION
             #    cone.axis = vector(math.cos(math.radians(predator.vision_angle)) * -1,
             #                       math.sin(math.radians(predator.vision_angle)) * -1,
             #                       0)

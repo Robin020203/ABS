@@ -60,7 +60,7 @@ class Predator(Animal):
                 distance = math.hypot(dx, dy)
 
                 if distance <= self.smell_strength:
-                    self.vision_angle = math.degrees(math.atan2(-dy,-dx))
+                    self.vision_angle = math.degrees(math.atan2(dy,dx))
 
     def jump_attack(self, preys, world):
         visible_preys = self.look_for_prey(preys)

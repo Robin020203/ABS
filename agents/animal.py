@@ -14,7 +14,7 @@ class Animal:
         self.dead = False
         self.max_energy = 200
         self.energy = random.uniform(self.max_energy * 0.75, self.max_energy)
-        self.rest_recovery_rate = 5
+        self.rest_recovery_rate = 10
         self.recovery_target_energy = random.uniform(self.max_energy / 2, self.max_energy)
         self.resting = False
         self.energy_consumption = 0     #prey=0.5 and predator=1

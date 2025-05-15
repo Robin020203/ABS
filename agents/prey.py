@@ -77,7 +77,7 @@ class Prey(Animal):
         #    self.dead = True
 
     def reproduce(self, world):
-        number_of_babies = random.randint(1, 4) #random between 1 and 4 babies
+        number_of_babies = random.randint(1, 3) #random between 1 and 4 babies
         for baby in range(number_of_babies):
             new_prey = Prey(world,
                             self.position,
