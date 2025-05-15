@@ -27,6 +27,7 @@ class Predator(Animal):
         self.max_hunger = 250 # timesteps before dying of hunger
         self.reproduction_threshold = 3 #amount of prey to eat in order to reproduce
         self.eaten_prey = 0
+        self.smell_strength = 7.0
 
         #CONE VISUAL
         #self.cone_position = (self.position[0] + math.cos(math.radians(self.vision_angle)) * self.vision_range,
@@ -50,6 +51,16 @@ class Predator(Animal):
                     if angle_diff <= self.vision_width / 2: # difference has to be smaller than width/2
                         visible_preys.append((prey, distance)) # because its visible now
         return visible_preys
+
+    def smell_prey(self, preys):
+        if not self.resting:
+            for prey in preys:
+                dx = prey.position[0] - self.position[0]
+                dy = prey.position[1] - self.position[1]
+                distance = math.hypot(dx, dy)
+
+                if distance <= self.smell_strength:
+                    self.vision_angle = math.degrees(math.atan2(-dy,-dx))
 
     def jump_attack(self, preys, world):
         visible_preys = self.look_for_prey(preys)
@@ -82,6 +93,7 @@ class Predator(Animal):
 
 
     def update(self, world):
+        self.smell_prey(world.preys)
         self.jump_attack(world.preys, world)
         super().update(world)
 
