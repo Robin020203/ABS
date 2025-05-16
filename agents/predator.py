@@ -24,10 +24,10 @@ class Predator(Animal):
         self.vision_width = util.clip(10.0, 30.0, vision_width - (3.33 * vision_mutation))
         self.energy_consumption = 0.5 # how much energy spent each timestep when moving normally
         self.hunger = 0 # timesteps since last meal
-        self.max_hunger = 250 # timesteps before dying of hunger
+        self.max_hunger = random.uniform(100, 300) # timesteps before dying of hunger
         self.reproduction_threshold = 3 #amount of prey to eat in order to reproduce
         self.eaten_prey = 0
-        self.smell_strength = 7.0
+        self.smell_strength = 6.0
 
         #CONE VISUAL
         #self.cone_position = (self.position[0] + math.cos(math.radians(self.vision_angle)) * self.vision_range,
@@ -75,16 +75,18 @@ class Predator(Animal):
                 closest_prey = prey
                 closest_distance = distance
 
-        chance = 1 - closest_distance / self.vision_range
+        chance = 1 - (closest_distance / self.vision_range) ** 2 #exponential chance
         if chance < 0.1:
             chance = 0.1
 
-        if random.random() <= chance and self.energy > 50:
+        #if random.random() <= chance and self.energy > 50:
+        if self.energy > 50:
             self.position = closest_prey.position
-            closest_prey.dead = True
-            #world.prey_dies(closest_prey)
-            self.hunger = 0
-            self.eaten_prey += 1
+            if random.random() <= chance:
+                closest_prey.dead = True
+                #world.prey_dies(closest_prey)
+                self.hunger = 0
+                self.eaten_prey += 1
 
         self.energy -= 50
         if self.energy <= 0:
