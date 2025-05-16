@@ -26,7 +26,7 @@ class Predator(Animal):
         self.vision_width = util.clip(10.0, 30.0, vision_width - (3.33 * vision_mutation))
         self.energy_consumption = 1.2 # how much energy spent each timestep when moving normally
         self.hunger = 0 # timesteps since last meal
-        self.max_hunger = random.uniform(100, 150) # timesteps before dying of hunger
+        self.max_hunger = random.uniform(150, 250) # timesteps before dying of hunger
         self.reproduction_threshold = 4 #amount of prey to eat in order to reproduce
         self.eaten_prey = 0
         self.smell_strength = 5.0
@@ -67,7 +67,7 @@ class Predator(Animal):
 
     def jump_attack(self, preys, world):
         visible_preys = self.look_for_prey(preys)
-        if not visible_preys:
+        if not visible_preys or self.hunger > 0.8 * self.max_hunger:
             return
 
         # search closest pray in vision
