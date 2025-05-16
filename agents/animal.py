@@ -1,6 +1,7 @@
 import random
 import math
 from typing import List, Optional, Tuple
+from ABS.mobility import Straight_motion,Brownian_motion
 
 # FEEDBACK: mobility class, zodat de mobility behaviour makkelijk kan worden ingeplugd
 class Animal:
@@ -18,9 +19,12 @@ class Animal:
         self.recovery_target_energy = random.uniform(self.max_energy / 2, self.max_energy)
         self.resting = False
         self.energy_consumption = 0     #prey=0.5 and predator=1
+        self.mobility = Straight_motion(self.speed)
 
 
     def update(self, world):
+
+        new_position, new_angle = self.mobility.move(self.position, self.vision_angle)
 
         if self.resting:
             self.energy += self.rest_recovery_rate
@@ -34,8 +38,8 @@ class Animal:
             return
 
         else:
-            dx = math.cos(math.radians(self.vision_angle)) * self.speed
-            new_x = self.position[0] + dx
+            self.vision_angle = new_angle
+            new_x = new_position[0]
             if new_x >= world.width:
                 self.vision_angle = 180 - self.vision_angle
                 new_x = world.width
@@ -43,8 +47,7 @@ class Animal:
                 self.vision_angle = 180 - self.vision_angle
                 new_x = 0
 
-            dy = math.sin(math.radians(self.vision_angle)) * self.speed
-            new_y = self.position[1] + dy
+            new_y = new_position[1]
             if new_y >= world.height:
                 self.vision_angle = -self.vision_angle
                 new_y = world.height
