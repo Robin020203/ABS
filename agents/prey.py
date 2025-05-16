@@ -24,10 +24,10 @@ class Prey(Animal):
         self.vision_range = util.clip(7.0, 13.0, vision_range + vision_mutation)
         #self.vision_width = max(40.0, min(80.0, vision_width - (6.66 * vision_mutation)))
         self.vision_width = util.clip(40.0, 80.0, vision_width - (6.66 * vision_mutation))
-        self.energy_consumption = 0.8
+        self.energy_consumption = 0.5
         self.rest_recovery_rate = 3
         self.time_alive = 0
-        self.reproduction_threshold = random.uniform(300, 800)
+        self.reproduction_threshold = random.uniform(200, 300)
         self.mobility = Brownian_motion(self.speed)
 
 
