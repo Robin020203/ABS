@@ -37,23 +37,23 @@ class Predator(Animal):
         #                      self.position[1] + math.sin(math.radians(self.vision_angle)) * self.vision_range)
 
 
-    def look_for_prey(self, preys):
-        visible_preys = []
+    def look_for_animals(self, animals):
+        visible_animals = []
         if not self.resting:
-            for prey in preys:
-                dx = prey.position[0] - self.position[0]
-                dy = prey.position[1] - self.position[1]
+            for animal in animals:
+                dx = animal.position[0] - self.position[0]
+                dy = animal.position[1] - self.position[1]
                 distance = math.hypot(dx, dy) # 2D distance between predator and prey
 
                 if distance <= self.vision_range:
-                    angle_to_prey = math.degrees(math.atan2(dy, dx))
-                    angle_diff = (angle_to_prey - self.vision_angle + 360) % 360
+                    angle_to_animal = math.degrees(math.atan2(dy, dx))
+                    angle_diff = (angle_to_animal - self.vision_angle + 360) % 360
                     if angle_diff > 180:
                         angle_diff = 360 - angle_diff # smallest corner
 
                     if angle_diff <= self.vision_width / 2: # difference has to be smaller than width/2
-                        visible_preys.append((prey, distance)) # because its visible now
-        return visible_preys
+                        visible_animals.append((animal, distance)) # because its visible now
+        return visible_animals
 
     def smell_prey(self, preys):
         if not self.resting:
@@ -66,7 +66,7 @@ class Predator(Animal):
                     self.vision_angle = math.degrees(math.atan2(dy,dx))
 
     def jump_attack(self, preys, world):
-        visible_preys = self.look_for_prey(preys)
+        visible_preys = self.look_for_animals(preys)
         if not visible_preys or self.hunger > 0.8 * self.max_hunger:
             return
 
@@ -97,7 +97,7 @@ class Predator(Animal):
 
 
     def jump_attack_on_predator(self, predators, world):
-        visible_predators = self.look_for_prey(predators)  # TEST OF DIT KAN
+        visible_predators = self.look_for_animals(predators)  # TEST OF DIT KAN
         if not visible_predators or self.hunger <= 0.90 * self.max_hunger:
             return
 
@@ -153,7 +153,3 @@ class Predator(Animal):
         # new_prey.vision_angle = random.uniform(0, 360)
         world.add_predator(new_predator)
         world.newborns.append(new_predator)
-
-
-
-

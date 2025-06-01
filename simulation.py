@@ -172,7 +172,7 @@ try:
                 if predator.resting:
                     sphere_obj.color = color.white  # REST MODE
                 else:
-                    visible_preys = predator.look_for_prey(world.preys)
+                    visible_preys = predator.look_for_animals(world.preys)
                     if visible_preys:
                         sphere_obj.color = color.blue  # HUNT MODE
                     else:
