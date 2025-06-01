@@ -5,7 +5,7 @@ from typing import Optional, Tuple
 #from ABS.agents.animal import Animal
 from agents.animal import Animal
 
-from ABS.mobility import Brownian_motion
+from mobility import Brownian_motion
 
 
 class Prey(Animal):

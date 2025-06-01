@@ -1,7 +1,7 @@
 import random
 import math
 from typing import List, Optional, Tuple
-from ABS.mobility import Straight_motion,Brownian_motion
+from mobility import Straight_motion,Brownian_motion
 
 # FEEDBACK: mobility class, zodat de mobility behaviour makkelijk kan worden ingeplugd
 class Animal:

@@ -5,7 +5,7 @@ from typing import Optional, Tuple
 #from ABS.agents.animal import Animal
 from agents.animal import Animal
 
-from ABS.mobility import Brownian_motion
+from mobility import Brownian_motion
 
 
 class Predator(Animal):
@@ -96,10 +96,38 @@ class Predator(Animal):
             self.energy = 0
 
 
+    def jump_attack_on_predator(self, predators, world):
+        visible_predators = self.look_for_prey(predators)  # TEST OF DIT KAN
+        if not visible_predators or self.hunger <= 0.90 * self.max_hunger:
+            return
+
+        # search closest predator in vision
+        closest_pred = None
+        closest_distance = None
+        for pred, distance in visible_predators:
+            if closest_pred is None or distance < closest_distance:
+                closest_pred = pred
+                closest_distance = distance
+
+        chance = 1 - (closest_distance / self.vision_range) ** 2 # exponential chance
+        if chance < 0.1:
+            chance = 0.1
+
+        if self.energy > 50:
+            self.position = closest_pred.position
+            if random.random() <= chance:
+                closest_pred.dead = True
+                self.hunger = 0
+
+        self.energy -= random.gauss(50, 10)
+        if self.energy <= 0:
+            self.energy = 0
+
 
     def update(self, world):
         self.smell_prey(world.preys)
         self.jump_attack(world.preys, world)
+        self.jump_attack_on_predator(world.predators, world)
         super().update(world)
 
         #CONE VISUAL
