@@ -90,12 +90,23 @@ class Prey(Animal):
         #    self.dead = True
 
     def reproduce(self, world):
-        number_of_babies = random.randint(1, 4) #random between 1 and 4 babies
-        for baby in range(number_of_babies):
-            new_prey = Prey(world,
-                            self.position,
-                            self.vision_range,
-                            self.vision_width)
-            #new_prey.vision_angle = random.uniform(0, 360)
-            world.add_prey(new_prey)
-            world.newborns.append(new_prey)
+        if len(world.preys) < 80:
+            number_of_babies = random.randint(1, 4) #random between 1 and 4 babies
+            for baby in range(number_of_babies):
+                new_prey = Prey(world,
+                                self.position,
+                                self.vision_range,
+                                self.vision_width)
+                #new_prey.vision_angle = random.uniform(0, 360)
+                world.add_prey(new_prey)
+                world.newborns.append(new_prey)
+        else:
+            number_of_babies = random.randint(0, 1)  # random between 0 and 1 babies
+            for baby in range(number_of_babies):
+                new_prey = Prey(world,
+                                self.position,
+                                self.vision_range,
+                                self.vision_width)
+                # new_prey.vision_angle = random.uniform(0, 360)
+                world.add_prey(new_prey)
+                world.newborns.append(new_prey)

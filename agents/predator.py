@@ -155,10 +155,23 @@ class Predator(Animal):
             self.eaten_prey = 0
 
     def reproduce(self, world):
-        new_predator = Predator(world,
-                                self.position,
-                                self.vision_range,
-                                self.vision_width)
-        # new_prey.vision_angle = random.uniform(0, 360)
-        world.add_predator(new_predator)
-        world.newborns.append(new_predator)
+        if len(world.predators) < 40:
+            new_predator = Predator(world,
+                                    self.position,
+                                    self.vision_range,
+                                    self.vision_width)
+            # new_prey.vision_angle = random.uniform(0, 360)
+            world.add_predator(new_predator)
+            world.newborns.append(new_predator)
+        else:
+            number_of_babies = random.randint(0, 1)  # random between 0 and 1 babies
+            if number_of_babies > 0:
+                new_predator = Predator(world,
+                                        self.position,
+                                        self.vision_range,
+                                        self.vision_width)
+                # new_prey.vision_angle = random.uniform(0, 360)
+                world.add_predator(new_predator)
+                world.newborns.append(new_predator)
+            else:
+                return
