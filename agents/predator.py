@@ -31,6 +31,9 @@ class Predator(Animal):
         self.eaten_prey = 0
         self.smell_strength = 5.0
         self.mobility = Brownian_motion(self.speed)
+        self.overcrowding_threshold = 6
+        self.overcrowding_distance = 5
+        self.overcrowding_death_chance=0.2
 
         #CONE VISUAL
         #self.cone_position = (self.position[0] + math.cos(math.radians(self.vision_angle)) * self.vision_range,
@@ -125,6 +128,11 @@ class Predator(Animal):
 
 
     def update(self, world):
+        nearby_predators = self.count_overcrowding(world.predators, self.overcrowding_distance)
+        if nearby_predators > self.overcrowding_threshold:
+            if random.random < self.overcrowding_death_chance:
+                self.dead = True
+                return
         self.smell_prey(world.preys)
         self.jump_attack(world.preys, world)
         self.jump_attack_on_predator(world.predators, world)
