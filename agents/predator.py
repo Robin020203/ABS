@@ -155,7 +155,7 @@ class Predator(Animal):
             self.eaten_prey = 0
 
     def reproduce(self, world):
-        if len(world.predators) < 40:
+        if len(world.predators) < 20:
             new_predator = Predator(world,
                                     self.position,
                                     self.vision_range,

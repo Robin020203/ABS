@@ -90,7 +90,7 @@ class Prey(Animal):
         #    self.dead = True
 
     def reproduce(self, world):
-        if len(world.preys) < 80:
+        if len(world.preys) < 50:
             number_of_babies = random.randint(1, 4) #random between 1 and 4 babies
             for baby in range(number_of_babies):
                 new_prey = Prey(world,
@@ -101,7 +101,7 @@ class Prey(Animal):
                 world.add_prey(new_prey)
                 world.newborns.append(new_prey)
         else:
-            number_of_babies = random.randint(0, 1)  # random between 0 and 1 babies
+            number_of_babies = random.randint(0, 2)  # random between 0 and 2 babies
             for baby in range(number_of_babies):
                 new_prey = Prey(world,
                                 self.position,
