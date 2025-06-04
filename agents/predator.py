@@ -85,14 +85,15 @@ class Predator(Animal):
         if chance < 0.1:
             chance = 0.1
 
-        #if random.random() <= chance and self.energy > 50:
-        if self.energy > 50:
-            self.position = closest_prey.position
-            if random.random() <= chance:
-                closest_prey.dead = True
-                #world.prey_dies(closest_prey)
-                self.hunger = 0
-                self.eaten_prey += 1
+        if len(world.preys) > 10:
+            #if random.random() <= chance and self.energy > 50:
+            if self.energy > 50:
+                self.position = closest_prey.position
+                if random.random() <= chance:
+                    closest_prey.dead = True
+                    #world.prey_dies(closest_prey)
+                    self.hunger = 0
+                    self.eaten_prey += 1
 
         self.energy -= random.gauss(50, 10)
         if self.energy <= 0:
