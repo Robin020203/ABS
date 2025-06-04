@@ -21,15 +21,15 @@ class Animal:
         self.energy_consumption = 0     #prey=0.5 and predator=1
         self.mobility = Straight_motion(self.speed)
 
-    def count_overcrowding(self, animals, distance_threshold):
-        count = 0
-        for animal in animals:
-            if animal is not self and isinstance(animal, self.__class__):
-                dx= animal.position[0] - self.position[0]
-                dy= animal.position[1] - self.position[1]
-                distance = math.hypot(dx, dy)
-                if distance <= distance_threshold: count +=1
-        return count
+    #def count_overcrowding(self, animals, distance_threshold):
+    #    count = 0
+    #    for animal in animals:
+    #        if animal is not self and isinstance(animal, self.__class__):
+    #            dx= animal.position[0] - self.position[0]
+    #            dy= animal.position[1] - self.position[1]
+    #            distance = math.hypot(dx, dy)
+    #            if distance <= distance_threshold: count +=1
+    #    return count
 
 
     def update(self, world):

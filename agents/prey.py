@@ -29,9 +29,9 @@ class Prey(Animal):
         self.time_alive = 0
         self.reproduction_threshold = random.uniform(200, 300)
         self.mobility = Brownian_motion(self.speed)
-        self.overcrowding_threshold = 15
-        self.overcrowding_distance = 5
-        self.overcrowding_death_chance=0.3
+        #self.overcrowding_threshold = 15
+        #self.overcrowding_distance = 5
+        #self.overcrowding_death_chance=0.3
 
 
     def look_for_predator(self, predators):
@@ -72,11 +72,11 @@ class Prey(Animal):
 
 
     def update(self, world):
-        nearby_prey = self.count_overcrowding(world.preys, self.overcrowding_distance)
-        if nearby_prey > self.overcrowding_threshold:
-            if random.random < self.overcrowding_death_chance:
-                self.dead = True
-                return
+        #nearby_prey = self.count_overcrowding(world.preys, self.overcrowding_distance)
+        #if nearby_prey > self.overcrowding_threshold:
+        #    if random.random < self.overcrowding_death_chance:
+        #        self.dead = True
+        #        return
         self.run_away_from_predators(world.predators)
         super().update(world)
         self.energy -= self.energy_consumption
